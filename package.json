@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@react-spring/three": "~9.6.1",
+    "@react-three/drei": "^9.65.3",
+    "@react-three/fiber": "^8.12.0",
+    "@types/ws": "^8.5.10",
+    "@use-gesture/react": "^10.2.27",
+    "glsl-random": "^0.0.5",
+    "next": "^13.3.0",
+    "next-pwa": "^5.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "tailwind": "^4.0.0",
+    "three": "^0.151.3",
+    "three-stdlib": "^2.21.8",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^13.3.0",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.35",
+    "@types/three": "^0.150.1",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-config-next": "^13.3.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-tailwindcss": "^3.11.0",
+    "file-loader": "^6.2.0",
+    "glslify": "^7.1.1",
+    "glslify-loader": "^2.0.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.7",
+    "prettier-plugin-tailwindcss": "^0.2.7",
+    "raw-loader": "^4.0.2",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4",
+    "url-loader": "^4.1.1"
+  },
+  "scripts": {
+    "eslint": "next lint --fix --dir src",
+    "prettier": "npx prettier --list-different \"./src/**/*.{ts,tsx,md}\" \"./app/**/*.{ts,tsx,md}\"\"",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "EXPORT=true next build && EXPORT=true next export",
+    "analyze": "ANALYZE=true next build",
+    "start": "next start"
+  }
+}

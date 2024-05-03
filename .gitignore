@@ -1,0 +1,26 @@
+#Webstorm
+.idea
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+
+# next-pwa
+/public/workbox-*.js
+/public/sw.js

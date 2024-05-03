@@ -1,0 +1,7 @@
+{
+  "extends": ["next", "prettier", "plugin:tailwindcss/recommended"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "no-var": "error"
+  }
+}
