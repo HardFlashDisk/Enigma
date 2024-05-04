@@ -15,4 +15,4 @@ npm run dev
 ts-node server.ts
 ```
 
-the base design and machine logic is taken from this repo : https://github.com/alextebbs/enigma
+the base design and machine logic have been taken from this repo : https://github.com/alextebbs/enigma
