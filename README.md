@@ -14,3 +14,5 @@ npm run dev
 ```bash
 ts-node server.ts
 ```
+
+the base design and machine logic is taken from this repo : https://github.com/alextebbs/enigma
