@@ -10,7 +10,7 @@ import {
 interface PanelHeaderProps {
   title: string
   connected: boolean
-  onSendClick: void
+  onSendClick: any
   toolTipIsActive?: boolean
   toolTipPosition?: 'inside' | 'outside'
   children?: React.ReactNode

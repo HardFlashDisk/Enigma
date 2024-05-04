@@ -7,11 +7,12 @@ import { PanelHeader } from '@/components/dom/PanelHeader'
 import { Log, Machine, MachineState } from '@/components/machine/Machine'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import type { Config, PlugConfig, RotorConfig } from '@/types/types'
-import json5 from 'json5'
 
 export default function Page() {
-  const { sendMessage, readyState } = useWebSocket("ws://localhost:8000")
-  const [connected, setConnected] = useState<boolean>(false)
+  const HOST = process.env.NEXT_PUBLIC_WS_HOST;
+  const PORT = process.env.NEXT_PUBLIC_WS_PORT;
+  const SOCKET_URL = `ws://${HOST}:${PORT}`
+
   const [machineState, setMachineState] = useState<MachineState>({
     plugboard: {},
     rotors: initialRotors,
@@ -21,6 +22,8 @@ export default function Page() {
   const [transformationLog, setTransformationLog] = useState<Log | null>(null)
   const [plainText, setPlainText] = useState<string>('')
   const [cipherText, setCipherText] = useState<string>('')
+
+  const { sendMessage, readyState } = useWebSocket(SOCKET_URL);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -49,7 +52,7 @@ export default function Page() {
     setTransformationLog(machine.exportTransformationLog())
   }
 
-  const handleClickSendConfig = useCallback(() => {
+  const handleClickSendConfig = () => {
     const rotor: RotorConfig = {
       rotors: [
         {
@@ -70,15 +73,7 @@ export default function Page() {
     const config: Config = { rotorConfig: rotor, substitutionConfig: plug, message: plainText }
 
     sendMessage(JSON.stringify(config))
-  }, []);
-
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  }[readyState]
+  };
 
   return (
     <div>
@@ -107,8 +102,8 @@ export default function Page() {
           <div className='absolute inset-x-0 bottom-0'>
             <PanelHeader
               title='Rotors'
-              connected={connectionStatus === "Open"}
-              onSendClick={handleClickSendConfig()}
+              connected={readyState === ReadyState.OPEN}
+              onSendClick={handleClickSendConfig}
               toolTipPosition='inside'
             />
           </div>
@@ -120,7 +115,7 @@ export default function Page() {
 
             <PanelHeader
               title='Input / Output'
-              connected={connected}
+              connected={false}
               onSendClick={undefined}
               />
 
@@ -152,7 +147,7 @@ export default function Page() {
 
             <PanelHeader
               title='Plugboard'
-              connected={connected}
+              connected={false}
               onSendClick={undefined}
             />
           </div>

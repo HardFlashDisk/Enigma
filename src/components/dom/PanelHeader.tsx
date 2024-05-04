@@ -26,10 +26,9 @@ export const PanelHeader: React.FC<PanelHeaderProps> = (props) => {
             </span>
             <button
               className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
-              disabled={!connected}
-              onClick={() => onSendClick}
+              onClick={onSendClick}
             >
-              Send
+              Send configuration
             </button>
           </>
         )}

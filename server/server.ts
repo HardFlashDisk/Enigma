@@ -18,7 +18,7 @@ wss.on('connection', (ws: WebSocket) => {
   clients.push(ws)
   console.log('New client connected');
 
-  ws.on('message', (ws: WebSocket, message: any) => {
+  ws.on('message', (message: any) => {
     const clientToTransfer = clients.find(c => c !== ws)
     clientToTransfer?.send(message)
   });

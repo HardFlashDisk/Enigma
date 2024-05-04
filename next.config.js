@@ -3,15 +3,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const nextConfig = {
-  // uncomment the following snippet if using styled components
-  // compiler: {
-  //   styledComponents: true,
-  // },
   experimental: {},
   images: {},
   reactStrictMode: true,
+  env: {
+    NEXT_PUBLIC_WS_HOST: 'localhost',
+    NEXT_PUBLIC_WS_PORT: 8000,
+  },
   webpack(config, { isServer }) {
-    // audio support
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
       exclude: config.exclude,
@@ -30,7 +29,6 @@ const nextConfig = {
       ],
     })
 
-    // shader support
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
       exclude: /node_modules/,
@@ -39,14 +37,6 @@ const nextConfig = {
 
     return config
   },
-}
-
-// manage i18n
-if (process.env.EXPORT !== 'true') {
-  nextConfig.i18n = {
-    locales: ['en', 'jp'],
-    defaultLocale: 'en',
-  }
 }
 
 const KEYS_TO_OMIT = [
