@@ -18,7 +18,6 @@ export default function Page() {
     rotors: initialRotors,
     reflector: initialReflector,
   })
-  const [configFromFriend, setConfigFromFriend] = useState<Config | null>(null)
   const [transformationLog, setTransformationLog] = useState<Log | null>(null)
   const [plainText, setPlainText] = useState<string>('')
   const [cipherText, setCipherText] = useState<string>('')
