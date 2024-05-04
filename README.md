@@ -9,3 +9,8 @@ npm install
 ```bash
 npm run dev
 ```
+
+> Run the WebSocket server in `/server`
+```bash
+ts-node server.ts
+```
