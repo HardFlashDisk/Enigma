@@ -1,15 +1,16 @@
-# Enigma
+## Requirements
 
-### Requirements
 * Node@>=18.9.0
 
-### Installation
+## Installation
+
 > Install all dependencies in `/enigma`
 ```bash
 npm install
 ```
 
-### Usage
+## Usage
+
 > Start the server
 ```bash
 npm run dev
