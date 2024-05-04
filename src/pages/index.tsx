@@ -1,6 +1,6 @@
 import { Plugboard } from '@/components/dom/Plugboard'
 import { IO } from '@/components/dom/IO'
-import { ChangeEvent, useCallback, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { initialReflector, initialRotors } from '@/_globals'
 import { RotorsScene } from '@/components/canvas/RotorScene'
 import { PanelHeader } from '@/components/dom/PanelHeader'
@@ -18,12 +18,12 @@ export default function Page() {
     rotors: initialRotors,
     reflector: initialReflector,
   })
-
+  const [configFromFriend, setConfigFromFriend] = useState<Config | null>(null)
   const [transformationLog, setTransformationLog] = useState<Log | null>(null)
   const [plainText, setPlainText] = useState<string>('')
   const [cipherText, setCipherText] = useState<string>('')
 
-  const { sendMessage, readyState } = useWebSocket(SOCKET_URL);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(SOCKET_URL);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -70,10 +70,25 @@ export default function Page() {
       ]
     }
     const plug: PlugConfig = { substitutions: machineState.plugboard }
-    const config: Config = { rotorConfig: rotor, substitutionConfig: plug, message: plainText }
+    const config: Config = { rotorConfig: rotor, substitutionConfig: plug, message: cipherText }
 
     sendMessage(JSON.stringify(config))
   };
+
+  useEffect(() => {
+    if(lastMessage !== null) {
+      alert(lastMessage.data)
+      // const configs: Config = lastMessage.data as Config
+      // alert(`
+      // ROTORS :
+      //   - ${configs.rotorConfig?.rotors[0].name} = ${configs.rotorConfig?.rotors[0].position}
+      //   - ${configs.rotorConfig?.rotors[1].name} = ${configs.rotorConfig?.rotors[1].position}
+      //   - ${configs.rotorConfig?.rotors[2].name} = ${configs.rotorConfig?.rotors[2].position}
+      // MESSAGE :
+      //   => ${configs.message}
+      // `)
+    }
+  }, [lastMessage])
 
   return (
     <div>
@@ -99,9 +114,9 @@ export default function Page() {
             </div>
           </div>
 
-          <div className='absolute inset-x-0 bottom-0'>
+          <div className="absolute inset-x-0 bottom-0">
             <PanelHeader
-              title='Rotors'
+              title="Rotors"
               connected={readyState === ReadyState.OPEN}
               onSendClick={handleClickSendConfig}
               toolTipPosition='inside'

@@ -1,6 +1,9 @@
 #Webstorm
 .idea
 
+# env
+next.config.js
+
 # dependencies
 /node_modules
 

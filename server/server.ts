@@ -20,7 +20,7 @@ wss.on('connection', (ws: WebSocket) => {
 
   ws.on('message', (message: any) => {
     const clientToTransfer = clients.find(c => c !== ws)
-    clientToTransfer?.send(message)
+    clientToTransfer?.send(message.toString())
   });
 
   ws.on('close', (ws: WebSocket) => {
