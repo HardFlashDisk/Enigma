@@ -1,11 +1,11 @@
 import React from 'react'
 import { PanelHeaderProps } from '@/interfaces/interfaces'
 
-
 export const PanelHeader: React.FC<PanelHeaderProps> = (props) => {
   const {
     title,
     connected,
+    onSendClick,
     toolTipIsActive = false,
     toolTipPosition = 'outside',
     children,
@@ -16,13 +16,22 @@ export const PanelHeader: React.FC<PanelHeaderProps> = (props) => {
       <div
         className={`flex items-center gap-x-1.5 rounded-full bg-black px-1.5 py-0.5 text-xs font-medium text-gray-600`}>
         {title === "Rotors" && (
-          <span
-            className={`inline-flex items-center gap-x-1.5 rounded-full bg-black px-1.5 py-0.5 text-xs font-medium ${connected? "text-green-600" : "text-red-600"} `}>
-            <svg className={`h-1.5 w-1.5 fill-gray-400`} viewBox="0 0 6 6" aria-hidden="true">
-              <circle cx={3} cy={3} r={3} color={connected? "green" : "red"} />
-            </svg>
-            {connected? "Connected" : "Not connected"}
-          </span>
+          <>
+            <span
+              className={`inline-flex items-center gap-x-1.5 rounded-full bg-black px-1.5 py-0.5 text-xs font-medium ${connected ? 'text-green-600' : 'text-red-600'} `}>
+              <svg className={`h-1.5 w-1.5 fill-gray-400`} viewBox="0 0 6 6" aria-hidden="true">
+                <circle cx={3} cy={3} r={3} color={connected ? 'green' : 'red'} />
+              </svg>
+              {connected ? 'Connected' : 'Not connected'}
+            </span>
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
+              disabled={!connected}
+              onClick={() => onSendClick}
+            >
+              Send
+            </button>
+          </>
         )}
         <div className="ml-auto p-2 px-4">{title}</div>
       </div>
